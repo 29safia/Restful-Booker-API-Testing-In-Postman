@@ -1,0 +1,4 @@
+
+{for report generate}
+
+newman run Batch29.postman_collection.json -e Batch29.postman_environment.json -r htmlextra
