@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "bed3fae2-b993-4bc3-b6f5-cfae0fd319be",
 		"name": "APIproject1",
+		"description": "Safia_Akther_Chowdhury_SQA",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "39629746",
 		"_collection_link": "https://shark8-1103.postman.co/workspace/API_1_Testing~894bc503-c0bd-42d7-b303-ddc34b9727d5/collection/39629746-bed3fae2-b993-4bc3-b6f5-cfae0fd319be?action=share&source=collection_link&creator=39629746"
@@ -94,7 +95,8 @@
 						"booking",
 						""
 					]
-				}
+				},
+				"description": "### Create Booking\n\nThis endpoint is used to create booking by providing the necessary details.\n\n#### Purpose\n\nThe purpose of this request is to create a new booking with the guest's information, booking dates, and any additional needs or special requests.\n\n#### Expected Input\n\nThe request should include the following parameters in the raw request body type:\n\n- `firstname` (string): The first name of the guest.\n    \n- `lastname` (string): The last name of the guest.\n    \n- `totalprice` (number): The total price of the booking.\n    \n- `depositpaid` (boolean): Indicates if the deposit has been paid.\n    \n- `bookingdates` (object): Object containing the check-in and check-out dates.\n    \n    - `checkin` (string): The check-in date in the format \"YYYY-MM-DD\".\n        \n    - `checkout` (string): The check-out date in the format \"YYYY-MM-DD\".\n        \n- `additionalneeds` (string): Any additional needs or special requests for the booking.\n    \n\n#### Expected Output\n\nUpon successful execution, the response will have a status code of 200 and a JSON object with the following properties:\n\n- `bookingid` (number): The ID of the newly created booking.\n    \n- `booking` (object): An object containing the details of the booking, including:\n    \n    - `firstname` (string): The first name of the guest.\n        \n    - `lastname` (string): The last name of the guest.\n        \n    - `totalprice` (number): The total price of the booking.\n        \n    - `depositpaid` (boolean): Indicates if the deposit has been paid.\n        \n    - `bookingdates` (object): Object containing the check-in and check-out dates.\n        \n        - `checkin` (string): The check-in date in the format \"YYYY-MM-DD\".\n            \n        - `checkout` (string): The check-out date in the format \"YYYY-MM-DD\".\n            \n    - `additionalneeds` (string): Any additional needs or special requests for the booking.\n        \n\n#### Response (JSON Schema)\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"bookingid\": {\n      \"type\": \"number\"\n    },\n    \"booking\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"firstname\": {\n          \"type\": \"string\"\n        },\n        \"lastname\": {\n          \"type\": \"string\"\n        },\n        \"totalprice\": {\n          \"type\": \"number\"\n        },\n        \"depositpaid\": {\n          \"type\": \"boolean\"\n        },\n        \"bookingdates\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"checkin\": {\n              \"type\": \"string\"\n            },\n            \"checkout\": {\n              \"type\": \"string\"\n            }\n          }\n        },\n        \"additionalneeds\": {\n          \"type\": \"string\"\n        }\n      }\n    }\n  }\n}\n\n ```"
 			},
 			"response": []
 		},
@@ -212,7 +214,8 @@
 						"booking",
 						"{{id}}"
 					]
-				}
+				},
+				"description": "### Get Booking\n\n---\n\nThis endpoint retrieves the details of a specific booking identified by the `bookingid`.\n\n#### Request\n\n- Method: `GET`\n    \n- URL: `https://restful-booker.herokuapp.com/booking/`\n    \n\n#### Response\n\nThe response body follows the JSON schema below:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"firstname\": { \"type\": \"string\" },\n    \"lastname\": { \"type\": \"string\" },\n    \"totalprice\": { \"type\": \"number\" },\n    \"depositpaid\": { \"type\": \"boolean\" },\n    \"bookingdates\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"checkin\": { \"type\": \"string\", \"format\": \"date\" },\n        \"checkout\": { \"type\": \"string\", \"format\": \"date\" }\n      }\n    },\n    \"additionalneeds\": { \"type\": \"string\" }\n  }\n}\nThe response body contains the following fields:\n- `firstname` (string): The first name of the guest.\n- `lastname` (string): The last name of the guest.\n- `totalprice` (number): The total price of the booking.\n- `depositpaid` (boolean): Indicates if the deposit has been paid.\n- `bookingdates` (object): Object containing the check-in and check-out dates.\n  - `checkin` (string, date format): The check-in date.\n  - `checkout` (string, date format): The check-out date.\n- `additionalneeds` (string): Any additional needs specified for the booking, such as breakfast.\n\n ```"
 			},
 			"response": []
 		},
@@ -252,7 +255,8 @@
 					"path": [
 						"auth"
 					]
-				}
+				},
+				"description": "# Token for Authentication\n\nThis endpoint allows users to authenticate by providing their username and password.\n\n## Request\n\n- Method: POST\n    \n- Base URL: [https://restful-booker.herokuapp.com](https://restful-booker.herokuapp.com)\n    \n- Path: /auth\n    \n- Headers:\n    \n    - Content-Type: application/json\n        \n- Body:\n    \n    - username (string, required): The username of the user.\n        \n    - password (string, required): The password of the user.\n        \n\n## Response\n\nThe response for this request is a JSON object with the following schema:\n\n``` json\n{\n  \"token\": \"string\"\n}\n\n ```\n\n- token (string): The authentication token for the user."
 			},
 			"response": []
 		},
@@ -340,7 +344,8 @@
 						"booking",
 						"{{id}}"
 					]
-				}
+				},
+				"description": "### Update Booking\n\nThis endpoint allows the client to update the booking information by sending an HTTP PUT request to the specified booking ID.\n\n#### Request Body\n\n- `firstname` (string, required): The first name of the guest.\n    \n- `lastname` (string, required): The last name of the guest.\n    \n- `totalprice` (number, required): The total price of the booking.\n    \n- `depositpaid` (boolean, required): Indicates if the deposit has been paid.\n    \n- `bookingdates` (object, required): Object containing check-in and check-out dates.\n    \n    - `checkin` (string, required): The check-in date for the booking.\n        \n    - `checkout` (string, required): The check-out date for the booking.\n        \n- `additionalneeds` (string, required): Any additional needs or requests for the booking.\n    \n\n#### Response\n\nThe response for this request is a JSON object conforming to the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"bookingid\": { \"type\": \"string\" },\n    \"booking\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"firstname\": { \"type\": \"string\" },\n        \"lastname\": { \"type\": \"string\" },\n        \"totalprice\": { \"type\": \"number\" },\n        \"depositpaid\": { \"type\": \"boolean\" },\n        \"bookingdates\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"checkin\": { \"type\": \"string\" },\n            \"checkout\": { \"type\": \"string\" }\n          }\n        },\n        \"additionalneeds\": { \"type\": \"string\" }\n      }\n    }\n  }\n}\n\n ```"
 			},
 			"response": []
 		},
@@ -432,7 +437,8 @@
 						"booking",
 						"{{id}}"
 					]
-				}
+				},
+				"description": "### Booking After Update\n\nThis endpoint retrieves the details of a specific booking identified by the `bookingid` parameter.\n\n### Response\n\nThe response will be a JSON object with the following properties:\n\n- `bookingid`: (number) The unique identifier for the booking.\n    \n- `booking_details`: (object) An object containing the details of the booking, including information such as the customer's name, check-in date, check-out date, and any additional preferences.\n    \n- `payment_details`: (object) An object containing payment details, such as the total price, payment status.\n    \n\nExample:\n\n``` json\n{\n    \"firstname\": \"Nicolette\",\n    \"lastname\": \"Smith\",\n    \"totalprice\": 927,\n    \"depositpaid\": false,\n    \"bookingdates\": {\n        \"checkin\": \"2025-12-05\",\n        \"checkout\": \"2025-12-12\"\n    },\n    \"additionalneeds\": \"Ball\"\n}\n\n ```"
 			},
 			"response": []
 		}
